@@ -67,8 +67,10 @@
 
   const previewImages = skipDelay => {
     if (!hoveredImg.el) return
+    const nextImgIndex = (hoveredImg.index + 1) % hoveredImg.images.length
+    if (hoveredImg.index == nextImgIndex) return
+    hoveredImg.index = nextImgIndex
     stopWatch.start()
-    hoveredImg.index = (hoveredImg.index + 1) % hoveredImg.images.length
     prefetchImage(hoveredImg.images[hoveredImg.index])
     .then(() => {
       const ms = stopWatch.stop()
